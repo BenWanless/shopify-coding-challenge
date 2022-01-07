@@ -2,24 +2,26 @@ import React, { useEffect, useState } from "react";
 import { Container } from "@mui/material";
 import NasaPhotoCard from "../NasaPhotoCard";
 import Masonry from "react-masonry-css";
-
-const api_key = process.env.REACT_APP_NASA_KEY;
-const start_date = "2021-12-29"
+import axios from "axios";
+// import CircularProgress from "@mui/material/CircularProgress"
+import InfiniteScroll from "react-infinite-scroll-component";
 
 export default function NasaPhoto() {
-  const [photoData, setPhotoData] = useState(null);
+  const [photoData, setPhotoData] = useState([]);
 
   useEffect(() => {
     fetchPhoto();
-    async function fetchPhoto() {
-      const res = await fetch(
-        `https://api.nasa.gov/planetary/apod?api_key=${api_key}&start_date=${start_date}`
-      );
-      const data = await res.json();
-      setPhotoData(data);
-      console.log("the photo data",data);
-    }
   }, []);
+
+  const fetchPhoto = () => {
+    const api_root = "https://api.nasa.gov/planetary/apod?api_key=";
+    const api_key = process.env.REACT_APP_NASA_KEY;
+
+    axios
+      .get(`${api_root}${api_key}&count=10&thumbs`)
+      .then((res) => setPhotoData([...photoData, ...res.data]));
+    console.log(photoData);
+  };
 
   const breakpoints = {
     default: 3,
@@ -31,17 +33,26 @@ export default function NasaPhoto() {
 
   return (
     <Container>
-      <Masonry
+      
+        <InfiniteScroll
+          dataLength={photoData.length}
+          next={fetchPhoto}
+          hasMore={true}
+          loader={<h4>Loading...</h4>}
+        >
+          <Masonry
         breakpointCols={breakpoints}
         className="my-masonry-grid"
         columnClassName="my-masonry-grid_column"
       >
-        {photoData.map((photo) =>(
-          <div item key={photo.date}>
-            <NasaPhotoCard photoData={photo}/>
-          </div>
-        ))}
-      </Masonry>
+          {photoData.map((photo) => (
+            <div item key={photo.date}>
+              <NasaPhotoCard photoData={photo} />
+            </div>
+          ))}
+          </Masonry>
+        </InfiniteScroll>
+      
     </Container>
   );
 }
