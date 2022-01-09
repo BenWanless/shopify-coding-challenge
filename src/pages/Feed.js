@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Container } from "@mui/material";
-import NasaPhotoCard from "../NasaPhotoCard";
+import FeedCard from "../components/FeedCard";
 import Masonry from "react-masonry-css";
 import axios from "axios";
 // import CircularProgress from "@mui/material/CircularProgress"
@@ -20,7 +20,6 @@ export default function NasaPhoto() {
     axios
       .get(`${api_root}${api_key}&count=10&thumbs`)
       .then((res) => setPhotoData([...photoData, ...res.data]));
-    console.log(photoData);
   };
 
   const breakpoints = {
@@ -47,7 +46,7 @@ export default function NasaPhoto() {
       >
           {photoData.map((photo) => (
             <div item key={photo.date}>
-              <NasaPhotoCard photoData={photo} />
+              <FeedCard photoData={photo} />
             </div>
           ))}
           </Masonry>
