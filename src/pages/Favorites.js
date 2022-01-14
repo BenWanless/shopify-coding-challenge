@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import axios from "axios";
 import { Container, Typography } from "@mui/material";
 import FeedCard from "../components/FeedCard";
 import Masonry from "react-masonry-css";
@@ -31,12 +30,6 @@ export default function Favorites() {
             </div>
           ))}
           </Masonry>
-
-          {/* {favorites.map((photo) => (
-              <div>
-                  {photo.title}
-              </div>
-          ))} */}
    </Container>
   );
 }

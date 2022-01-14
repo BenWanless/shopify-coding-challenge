@@ -5,7 +5,6 @@ import Masonry from "react-masonry-css";
 import axios from "axios";
 // import CircularProgress from "@mui/material/CircularProgress"
 import InfiniteScroll from "react-infinite-scroll-component";
-import { validateDateTime } from "@mui/lab/internal/pickers/date-time-utils";
 
 export default function NasaPhoto() {
   const [photoData, setPhotoData] = useState([]);
