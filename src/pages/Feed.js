@@ -24,7 +24,7 @@ export default function NasaPhoto() {
 
   const fetchPhoto = () => {
     const api_root = "https://api.nasa.gov/planetary/apod?api_key=";
-    const api_key = process.env.REACT_APP_NASA_KEY;
+    const api_key = REACT_APP_NASA_KEY;
 
     axios
       .get(`${api_root}${api_key}&count=10&thumbs`)
