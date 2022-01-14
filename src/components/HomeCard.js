@@ -27,10 +27,10 @@ export default function HomeCard({ PODData }) {
         />
         <CardContent>
           <CardHeader title={PODData.title} subheader={PODData.date} />
-          <Typography variant="h6" color="text.secondary">
+          <Typography variant="h6">
             Explanation:
           </Typography>
-          <Typography variant="body2" color="text.secondary">
+          <Typography variant="body2" >
             {PODData.explanation}
           </Typography>
         </CardContent>

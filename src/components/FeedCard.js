@@ -9,6 +9,8 @@ import {
   Button,
   styled,
   Collapse,
+  Tooltip,
+  Snackbar,
 } from "@material-ui/core";
 import {
   Share,
@@ -36,11 +38,26 @@ export default function FeedCard({ photoData, handler }) {
   };
 
   const [favoriteColor, setFavoriteColor] = useState(false);
+  const [open, setOpen] = React.useState(false);
   const colorChange = (photoData) => {
     setFavoriteColor(!favoriteColor);
     handler(photoData);
     console.log(favoriteColor);
   };
+
+
+
+  const handleCopy = () => {
+    navigator.clipboard.writeText(photoData.url);
+    setOpen(true);
+  };
+
+  const handleClose = (event, reason) => {
+    if (reason === 'clickaway') {
+      return;
+    }  setOpen(false);
+  };
+
 
   return (
     <div>
@@ -53,25 +70,35 @@ export default function FeedCard({ photoData, handler }) {
           sx={{ width: "100%" }}
         />
         <CardActions disableSpacing>
-          <IconButton
-            aria-label="Like"
-            // onClick={() => }
-            onClick={() => colorChange(photoData)}
-            color={favoriteColor ? "error" : "primary"}
-          >
-            <Favorite />
-          </IconButton>
-          <IconButton aria-label="share">
-            <Share />
-          </IconButton>
-          <ExpandMore
-            expand={expanded}
-            onClick={handleExpandClick}
-            aria-expanded={expanded}
-            aria-lable="show more"
-          >
-            <ExpandMoreIcon />
-          </ExpandMore>
+          <Tooltip title="Favorite" placement="bottom">
+            <IconButton
+              aria-label="Like"
+              onClick={() => colorChange(photoData)}
+              color={favoriteColor ? "error" : "primary"}
+            >
+              <Favorite />
+            </IconButton>
+          </Tooltip>
+          <Tooltip title="Share Link" placement="bottom">
+            <IconButton
+              aria-label="Share"
+              onClick={() => {
+                handleCopy(photoData.url)
+              }}
+            >
+              <Share />
+            </IconButton>
+          </Tooltip>
+          <Tooltip title="Expand More..." placement="bottom">
+            <ExpandMore
+              expand={expanded}
+              onClick={handleExpandClick}
+              aria-expanded={expanded}
+              aria-lable="show more"
+            >
+              <ExpandMoreIcon />
+            </ExpandMore>
+          </Tooltip>
         </CardActions>
         <Collapse in={expanded} timeout="auto" unmountOnExit>
           <CardContent>
@@ -84,6 +111,12 @@ export default function FeedCard({ photoData, handler }) {
           </CardContent>
         </Collapse>
       </Card>
+      <Snackbar
+        open={open}
+        autoHideDuration={6000}
+        onClose={handleClose}
+        message="Link Copied to Clipboard"
+      />
     </div>
   );
 }

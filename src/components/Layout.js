@@ -56,7 +56,7 @@ export default function Layout({ children }, props) {
             button
             key={item.name}
             onClick={() => history.push(item.path)}
-            className={location.pathname == item.path ? classes.active : null}
+            className={location.pathname === item.path ? classes.active : null}
           >
             <ListItemIcon>{item.icon}</ListItemIcon>
             <ListItemText primary={item.text} />
