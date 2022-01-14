@@ -12,7 +12,7 @@ export default function Home() {
 
   useEffect(() => {
     const api_root = "https://api.nasa.gov/planetary/apod?api_key=";
-    const api_key = process.env.REACT_APP_NASA_KEY;
+    const api_key = "NfK8RKlU8uOle200Qi3hMgORFffnSdyPwWtbgJ3U";
   
     axios
       .get(`${api_root}${api_key}`)
