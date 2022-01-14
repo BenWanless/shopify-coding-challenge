@@ -1,26 +1,42 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { Container, Typography } from "@mui/material";
+import FeedCard from "../components/FeedCard";
+import Masonry from "react-masonry-css";
 
 
 export default function Favorites() {
-//   const [PODData, setPODData] = useState([]);
+  const favorites = JSON.parse(localStorage.getItem('favorites'));
+  console.log('favorites page', favorites)
 
-//   useEffect(() => {
-//     const api_root = "https://api.nasa.gov/planetary/apod?api_key=";
-//     const api_key = process.env.REACT_APP_NASA_KEY;
-  
-//     axios
-//       .get(`${api_root}${api_key}`)
-//       .then((res) => setPODData(res.data));
-//   }, []);
-
+  const breakpoints = {
+    default: 3,
+    1100: 2,
+    700: 1,
+  };
 
   return (
    <Container>
      <Typography variant="h2">
        Favorites
      </Typography>
+     <Masonry
+        breakpointCols={breakpoints}
+        className="my-masonry-grid"
+        columnClassName="my-masonry-grid_column"
+      >
+          {favorites.map((photo) => (
+            <div item key={photo.date}>
+              <FeedCard photoData={photo}/>
+            </div>
+          ))}
+          </Masonry>
+
+          {/* {favorites.map((photo) => (
+              <div>
+                  {photo.title}
+              </div>
+          ))} */}
    </Container>
   );
 }

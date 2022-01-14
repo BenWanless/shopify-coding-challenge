@@ -16,7 +16,19 @@ import {
 import MenuIcon from "@mui/icons-material/Menu";
 import { Favorite, Home, SubjectOutlined } from "@mui/icons-material";
 import format from "date-fns/format";
-import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
+import {
+  useHistory,
+  useLocation,
+} from "react-router-dom/cjs/react-router-dom.min";
+import makeStyles from "@mui/styles/makeStyles";
+
+const useStyles = makeStyles(() => {
+  return {
+    active: {
+      background: "#f4f4f4",
+    },
+  };
+});
 
 const pages = [
   { text: "Home", path: "/", icon: <Home /> },
@@ -26,7 +38,9 @@ const pages = [
 const drawerWidth = 240;
 
 export default function Layout({ children }, props) {
+  const classes = useStyles();
   const history = useHistory();
+  const location = useLocation();
   const { window } = props;
   const [mobileOpen, setMobileOpen] = React.useState(false);
   const handleDrawerToggle = () => {
@@ -42,6 +56,7 @@ export default function Layout({ children }, props) {
             button
             key={item.name}
             onClick={() => history.push(item.path)}
+            className={location.pathname == item.path ? classes.active : null}
           >
             <ListItemIcon>{item.icon}</ListItemIcon>
             <ListItemText primary={item.text} />

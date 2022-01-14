@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import {
   Card,
   CardContent,
@@ -10,7 +10,11 @@ import {
   styled,
   Collapse,
 } from "@material-ui/core";
-import { Share, Favorite } from "@mui/icons-material";
+import {
+  Share,
+  Favorite,
+  SwapVerticalCircleTwoTone,
+} from "@mui/icons-material";
 import { ExpandMore as ExpandMoreIcon } from "@mui/icons-material";
 import { IconButton } from "@mui/material";
 
@@ -25,20 +29,18 @@ const ExpandMore = styled((props) => {
   }),
 }));
 
-export default function FeedCard({ photoData }) {
+export default function FeedCard({ photoData, handler }) {
   const [expanded, setExpanded] = React.useState(false);
-  const [favorites, setFavorites] = React.useState([]);
-
   const handleExpandClick = () => {
     setExpanded(!expanded);
   };
 
-  const addFavorite = (data) => {
-    if (!favorites.includes(data)) setFavorites(favorites.concat(data));
-    console.log(data)
-    console.log(favorites)
+  const [favoriteColor, setFavoriteColor] = useState(false);
+  const colorChange = (photoData) => {
+    setFavoriteColor(!favoriteColor);
+    handler(photoData);
+    console.log(favoriteColor);
   };
-
 
   return (
     <div>
@@ -51,7 +53,12 @@ export default function FeedCard({ photoData }) {
           sx={{ width: "100%" }}
         />
         <CardActions disableSpacing>
-          <IconButton aria-label="Like" onClick={() => addFavorite(photoData.title)}>
+          <IconButton
+            aria-label="Like"
+            // onClick={() => }
+            onClick={() => colorChange(photoData)}
+            color={favoriteColor ? "error" : "primary"}
+          >
             <Favorite />
           </IconButton>
           <IconButton aria-label="share">

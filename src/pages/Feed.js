@@ -5,12 +5,21 @@ import Masonry from "react-masonry-css";
 import axios from "axios";
 // import CircularProgress from "@mui/material/CircularProgress"
 import InfiniteScroll from "react-infinite-scroll-component";
+import { validateDateTime } from "@mui/lab/internal/pickers/date-time-utils";
 
 export default function NasaPhoto() {
   const [photoData, setPhotoData] = useState([]);
+  const [favorites, setFavorites] = useState([]);
 
   useEffect(() => {
     fetchPhoto();
+  }, []);
+
+  useEffect(async () => {
+    let savedFavorite = await JSON.parse(localStorage.getItem("favorites"));
+    if (savedFavorite) {
+      setFavorites(savedFavorite);
+    }
   }, []);
 
   const fetchPhoto = () => {
@@ -28,30 +37,43 @@ export default function NasaPhoto() {
     700: 1,
   };
 
+  const FavoriteHandler = (val) => {
+    const newFavorites = [val, ...favorites];
+    const alreadyFavorite = favorites.filter(
+      (photo) => photo.date === val.date
+    );
+    if (alreadyFavorite.length !== 0) {
+      const removedFavorite = favorites.filter(
+        (photo) => photo.date != val.date
+      );
+      setFavorites(removedFavorite);
+      localStorage.setItem("favorites", JSON.stringify(favorites));
+    } else setFavorites(newFavorites);
+    localStorage.setItem("favorites", JSON.stringify(favorites));
+  };
+
   if (!photoData) return <div />;
 
   return (
     <Container>
-      
-        <InfiniteScroll
-          dataLength={photoData.length}
-          next={fetchPhoto}
-          hasMore={true}
-          loader={<h4>Loading...</h4>}
-        >
-          <Masonry
-        breakpointCols={breakpoints}
-        className="my-masonry-grid"
-        columnClassName="my-masonry-grid_column"
+      <InfiniteScroll
+        dataLength={photoData.length}
+        next={fetchPhoto}
+        hasMore={true}
+        loader={<h4>Loading...</h4>}
       >
+        <Masonry
+          breakpointCols={breakpoints}
+          className="my-masonry-grid"
+          columnClassName="my-masonry-grid_column"
+        >
           {photoData.map((photo) => (
             <div item key={photo.date}>
-              <FeedCard photoData={photo} />
+              <FeedCard photoData={photo} handler={FavoriteHandler} />
             </div>
           ))}
-          </Masonry>
-        </InfiniteScroll>
-      
+        </Masonry>
+      </InfiniteScroll>
     </Container>
   );
 }
