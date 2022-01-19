@@ -1,8 +1,8 @@
-#Shopify-Coding-Challange
+# Shopify-Coding-Challange
 >This was completed as part of the application for the Front End Developer Intern Summer 2022
 >Live Demo: https://quizzical-panini-24524e.netlify.app/favorites
 
-##Table of Contents
+## Table of Contents
 * [General Info](#general-information)
 * [Technologies Used](#technologies-used)
 * [Features](#features)
