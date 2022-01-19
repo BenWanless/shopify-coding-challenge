@@ -6,7 +6,6 @@ import Masonry from "react-masonry-css";
 
 export default function Favorites() {
   const favorites = JSON.parse(localStorage.getItem('favorites'));
-  console.log('favorites page', favorites)
 
   const breakpoints = {
     default: 3,

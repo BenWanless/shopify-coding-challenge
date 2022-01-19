@@ -10,8 +10,8 @@ import Favorites from "./pages/Favorites";
 const theme = createTheme({
   palette: {
     primary: {
-      main: "#FF69B4",
-    },
+      main: "#212938",
+    }
   },
 });
 
