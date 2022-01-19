@@ -3,7 +3,6 @@ This was completed as part of the application for the Front End Developer Intern
 Live Demo: https://quizzical-panini-24524e.netlify.app/favorites
 
 ## Table of Contents
-* [General Info](#general-information)
 * [Technologies Used](#technologies-used)
 * [Features](#features)
 * [Screenshots](#screenshots)
@@ -26,7 +25,7 @@ Live Demo: https://quizzical-panini-24524e.netlify.app/favorites
 - Add some screens
 
 ## Setup 
-> You can view a live version of this site (https://quizzical-panini-24524e.netlify.app/favorites) but if you would prefer to install a local version you can!
+> You can view a live version of this site (https://quizzical-panini-24524e.netlify.app/favorites) but if you would prefer to install a local version you can!  
 >In order to run a local version:
 - Clone the repo to your local project directory
 - In your local project directory run ```npm i``` and then ```npm start``` 
