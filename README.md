@@ -25,8 +25,9 @@ Live Demo: https://quizzical-panini-24524e.netlify.app/favorites
 - Add some screens
 
 ## Setup 
-> You can view a live version of this site (https://quizzical-panini-24524e.netlify.app/favorites) but if you would prefer to install a local version you can!  
->In order to run a local version:
+You can view a live version of this site (https://quizzical-panini-24524e.netlify.app/favorites) but if you would prefer to install a local version you can!  
+  
+In order to run a local version:
 - Clone the repo to your local project directory
 - In your local project directory run ```npm i``` and then ```npm start``` 
 - Off you go!
