@@ -1,6 +1,6 @@
 # Shopify-Coding-Challange
 This was completed as part of the application for the Front End Developer Intern Summer 2022
-Live Demo: https://quizzical-panini-24524e.netlify.app/favorites
+Live Demo: https://quizzical-panini-24524e.netlify.app
 
 ## Table of Contents
 * [Technologies Used](#technologies-used)
@@ -25,7 +25,7 @@ Live Demo: https://quizzical-panini-24524e.netlify.app/favorites
 - Add some screens
 
 ## Setup 
-You can view a live version of this site (https://quizzical-panini-24524e.netlify.app/favorites) but if you would prefer to install a local version you can!  
+You can view a live version of this site (https://quizzical-panini-24524e.netlify.app) but if you would prefer to install a local version you can!  
   
 In order to run a local version:
 - Clone the repo to your local project directory
